@@ -1,132 +1,525 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AnchroSite — Home</title>
-  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="AnchroSite — Blog, projects, and tinkering with networks and games." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Your Name — Portfolio</title>
+<meta name="description" content="Portfolio — projects, experience, interests, contact" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23007acc'/%3E%3Ctext x='50' y='58' font-size='42' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'%3EY%3C/text%3E%3C/svg%3E">
+
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220aa;
+    --muted:#9aa7b2;
+    --accent-1: #00d4ff;
+    --accent-2: #7b61ff;
+    --glass: rgba(255,255,255,0.04);
+    --card-radius:18px;
+    --max-width:1100px;
+    --ease:cubic-bezier(.2,.9,.2,1);
+  }
+
+  /* Reset-ish */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.12), transparent 10%),
+                radial-gradient(900px 400px at 90% 90%, rgba(0,212,255,0.06), transparent 20%),
+                var(--bg);
+    color: #e6eef6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:36px 20px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:var(--max-width);
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+
+  /* Mobile stack */
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr; padding-bottom:48px}
+    .sidebar{position:sticky; top:18px; z-index:5}
+  }
+
+  /* Sidebar */
+  .sidebar{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--card-radius);
+    padding:22px;
+    backdrop-filter: blur(8px) saturate(120%);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.6), inset 0 1px rgba(255,255,255,0.02);
+    position:relative;
+  }
+
+  .avatar{
+    width:92px;height:92px;border-radius:18px;
+    background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:36px;color:#041423;
+    box-shadow: 0 6px 20px rgba(123,97,255,0.12);
+    margin-bottom:16px;
+  }
+
+  .name{font-size:20px;font-weight:700}
+  .role{font-size:13px;color:var(--muted);margin-top:6px}
+
+  .nav{
+    margin-top:18px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .nav a{
+    color:var(--muted);text-decoration:none;padding:10px;border-radius:12px;
+    display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;
+    transition:all .28s var(--ease);
+  }
+  .nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent-1);transform:translateX(6px)}
+
+  .hire-btn{
+    display:inline-block;margin-top:14px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#041423;font-weight:700;text-decoration:none;box-shadow:0 8px 30px rgba(123,97,255,0.12);
+  }
+
+  /* Main content */
+  .main{
+    min-height:300px;
+  }
+
+  .hero{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    padding:20px;border-radius:18px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px;
+    box-shadow:0 6px 30px rgba(2,6,23,0.5);
+  }
+
+  .hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .intro{
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .intro h1{font-size:20px}
+  .intro p{color:var(--muted);font-size:14px;max-width:60ch}
+
+  .hero-actions{display:flex;gap:10px;align-items:center}
+  .btn{
+    padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+    background:transparent;color:#e8f1ff;font-weight:700;font-size:13px;cursor:pointer;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .btn.primary{
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#041423;box-shadow:0 10px 30px rgba(0,212,255,0.06);
+  }
+  .btn:active{transform:translateY(1px)}
+
+  /* Grid areas */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:18px;
+  }
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card);
+    border-radius:14px;padding:16px;overflow:hidden;position:relative;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+    border:1px solid rgba(255,255,255,0.02);
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(2,6,23,0.55)}
+
+  .card h3{margin-bottom:10px;font-size:15px}
+  .muted{color:var(--muted);font-size:13px}
+
+  /* Projects */
+  .project{
+    display:flex;gap:12px;align-items:center;
+  }
+  .project-thumb{
+    width:72px;height:56px;border-radius:10px;
+    background:linear-gradient(135deg,#14233b 0%, #0b1b2f 100%);
+    flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;
+    border:1px solid rgba(255,255,255,0.02);
+  }
+  .project-body{flex:1}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
+
+  /* Experience & Interests list */
+  .list-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+  .list-bullet{width:10px;height:10px;border-radius:4px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));margin-top:6px}
+
+  /* Gallery */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  @media (max-width:900px){ .gallery-grid{grid-template-columns:repeat(2,1fr)} }
+  .gthumb{
+    aspect-ratio: 4/3;border-radius:10px;overflow:hidden;display:block;position:relative;cursor:pointer;
+    background:linear-gradient(135deg,#061022,#062030);display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .gthumb:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(2,6,23,0.5)}
+
+  .overlay-grad{
+    position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.35));
+  }
+
+  /* gallery modal */
+  .modal{
+    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);
+    z-index:60;backdrop-filter: blur(6px);padding:24px;
+  }
+  .modal-content{max-width:1000px;width:100%;border-radius:14px;overflow:hidden;position:relative}
+  .modal-img{width:100%;height:70vh;object-fit:cover;background:#061123}
+  .modal-close{position:absolute;right:14px;top:14px;background:rgba(255,255,255,0.03);border-radius:10px;padding:8px;cursor:pointer}
+
+  /* footer / contact form */
+  .contact-row{display:flex;gap:12px}
+  @media (max-width:700px){ .contact-row{flex-direction:column} }
+  .input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;font-size:14px}
+  textarea{min-height:120px;resize:vertical}
+
+  /* small utilities */
+  .small{font-size:13px;color:var(--muted)}
+  .split{display:flex;gap:12px;align-items:center}
+  .chip{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:700}
+
+  /* reveal animations */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
+  .reveal.show{opacity:1;transform:none}
+
+  /* subtle animated background line */
+  .accent-line{
+    position:absolute;left:-40px;top:-40px;height:180px;width:180px;border-radius:50%;
+    background: conic-gradient(from 140deg at 50% 50%, rgba(123,97,255,0.08), rgba(0,212,255,0.04), transparent 60%);
+    filter: blur(24px);pointer-events:none;z-index:0;
+  }
+
+  /* tiny footer */
+  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">AnchroSite<span class="muted"> — Blog / News / Fun</span></a>
+  <div class="wrap" role="main" aria-labelledby="portfolioTitle">
+    <div class="accent-line" aria-hidden="true"></div>
 
-      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
-        <span class="sr-only">Toggle navigation</span>
-        ☰
-      </button>
+    <!-- SIDEBAR -->
+    <aside class="sidebar reveal" style="--delay:0ms">
+      <div class="avatar" aria-hidden="true">YN</div>
+      <div class="name">Your Name</div>
+      <div class="role">Product designer • Frontend engineer • Creative coder</div>
 
-      <nav id="site-nav" class="site-nav" role="navigation">
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <nav class="nav" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#interests">Interests</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
       </nav>
 
-      <div class="header-actions">
-        <button id="theme-toggle" class="btn subtle">Toggle theme</button>
-      </div>
-    </div>
-  </header>
+      <a class="hire-btn" href="#contact">Hire / Collaborate</a>
 
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-body">
-        <h1>Hi — I'm Anchro</h1>
-        <p class="lead">Writer, tinkerer, and networking enthusiast. This site is a place for projects, notes, and things I find interesting.</p>
-
-        <div class="hero-cta">
-          <a class="btn primary" href="projects.html">Explore Projects</a>
-          <a class="btn outline" href="blog.html">Read the Blog</a>
+      <div style="margin-top:16px" class="small">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <span class="chip">Location: Your City</span>
+          <span class="chip">Available: Open to work</span>
         </div>
       </div>
+    </aside>
 
-      <div class="hero-media">
-        <!-- placeholder image -->
-        <img src="assets/images/hero-placeholder-800x450.png" alt="Hero placeholder: workspace or abstract" />
+    <!-- MAIN -->
+    <main class="main">
+      <section class="hero reveal" id="portfolioTitle" style="--delay:40ms">
+        <div class="hero-top">
+          <div class="intro">
+            <h1>Hey — I'm Your Name</h1>
+            <p>Interface-focused engineer who builds delightful, accessible products. I specialize in front-end systems, animation, and delightful micro-interactions. Scroll to explore my projects, experience, and visual work.</p>
+            <div class="small" style="margin-top:6px">Available for freelance & full-time roles • <strong>Open to remote</strong></div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn primary" id="downloadResume">Download CV</button>
+            <a class="btn" href="#projects">See projects</a>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+          <div class="small">Tech: <strong>HTML • CSS • JavaScript • React • WebGL</strong></div>
+          <div class="small">Design: <strong>Figma • Motion</strong></div>
+        </div>
+      </section>
+
+      <!-- GRID: projects + experience -->
+      <section class="grid">
+        <div class="card reveal" id="projects" style="--delay:80ms">
+          <h3>Projects</h3>
+          <div class="muted small" style="margin-bottom:10px">Featured work — click to view (placeholders)</div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+            <button class="btn" data-filter="all">All</button>
+            <button class="btn" data-filter="web">Web</button>
+            <button class="btn" data-filter="game">Game</button>
+            <button class="btn" data-filter="tool">Tool</button>
+          </div>
+
+          <!-- list -->
+          <div id="projectList" aria-live="polite">
+            <article class="project" data-kind="web">
+              <div class="project-thumb">P1</div>
+              <div class="project-body">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <strong>Project One — Interactive Site</strong><span class="small">2025</span>
+                </div>
+                <div class="muted small">A responsive interactive landing with microinteractions and accessible animations.</div>
+                <div class="tags">
+                  <span class="tag">HTML</span><span class="tag">Animation</span><span class="tag">Accessibility</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project" data-kind="game">
+              <div class="project-thumb">P2</div>
+              <div class="project-body">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <strong>Project Two — Exploration Game</strong><span class="small">2024</span>
+                </div>
+                <div class="muted small">Prototype of an ambient exploration game with procedural narrative cues.</div>
+                <div class="tags">
+                  <span class="tag">Unity</span><span class="tag">Design</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project" data-kind="tool">
+              <div class="project-thumb">P3</div>
+              <div class="project-body">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <strong>Project Three — Dev Tool</strong><span class="small">2023</span>
+                </div>
+                <div class="muted small">CLI and UI tool for developer workflow automation.</div>
+                <div class="tags"><span class="tag">Node</span><span class="tag">CLI</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="card reveal" id="experience" style="--delay:120ms">
+          <h3>Experience</h3>
+          <div class="muted small" style="margin-bottom:12px">Selected — brief</div>
+
+          <div class="list-item">
+            <div class="list-bullet" aria-hidden="true"></div>
+            <div>
+              <strong>Frontend Engineer — Example Co</strong>
+              <div class="small muted">2022 – Present</div>
+              <div class="muted small">Built accessible design system components used across consumer products. Focused on performance and animations.</div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-bullet"></div>
+            <div>
+              <strong>Game Systems Designer — Indie Studio</strong>
+              <div class="small muted">2020 – 2022</div>
+              <div class="muted small">Designed systems for emergent storytelling and built prototypes in Unity.</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <strong>Education</strong>
+            <div class="muted small">B.S. in Computer Science — University Name (Year)</div>
+          </div>
+        </div>
+
+        <!-- Interests & quick contact -->
+        <div class="card reveal" id="interests" style="--delay:160ms">
+          <h3>Interests</h3>
+          <div class="muted small" style="margin-bottom:8px">What makes me curious</div>
+          <ul style="margin-top:8px;list-style:none;padding-left:0">
+            <li class="small">• Ambient storytelling and layered worldbuilding</li>
+            <li class="small">• Motion-led UX and expressive micro-interactions</li>
+            <li class="small">• Low-latency web graphics and shaders</li>
+            <li class="small">• Open-source tools and community projects</li>
+          </ul>
+
+          <div style="margin-top:12px">
+            <h3>Contact</h3>
+            <div class="muted small" style="margin-top:6px">Quick links</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <a class="btn" href="mailto:you@example.com">Email</a>
+              <a class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn" href="#" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal" id="gallery" style="--delay:200ms">
+          <h3>Gallery</h3>
+          <div class="muted small" style="margin-bottom:10px">Selected visuals & screenshots (placeholders)</div>
+
+          <div class="gallery-grid" id="galleryGrid" aria-label="Gallery">
+            <!-- thumbnails are simple blocks; replace with <img> when ready -->
+            <div class="gthumb" data-src="" tabindex="0">
+              <div class="overlay-grad"></div>
+              <div class="small">Visual 1</div>
+            </div>
+            <div class="gthumb" data-src="" tabindex="0"><div class="overlay-grad"></div><div class="small">Visual 2</div></div>
+            <div class="gthumb" data-src="" tabindex="0"><div class="overlay-grad"></div><div class="small">Visual 3</div></div>
+            <div class="gthumb" data-src="" tabindex="0"><div class="overlay-grad"></div><div class="small">Visual 4</div></div>
+            <div class="gthumb" data-src="" tabindex="0"><div class="overlay-grad"></div><div class="small">Visual 5</div></div>
+            <div class="gthumb" data-src="" tabindex="0"><div class="overlay-grad"></div><div class="small">Visual 6</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact form -->
+      <section class="card reveal" id="contact" style="margin-top:18px;--delay:240ms">
+        <h3>Contact / Say hi</h3>
+        <div class="muted small" style="margin-bottom:12px">I respond within a few days. Or email me directly at <strong>you@example.com</strong></div>
+
+        <form id="contactForm" class="contact-row" onsubmit="return false;" aria-label="Contact form">
+          <div style="flex:1">
+            <input class="input" id="name" placeholder="Your name" required />
+            <input class="input" id="email" placeholder="Email" style="margin-top:8px" required />
+          </div>
+
+          <div style="flex:1">
+            <textarea id="message" placeholder="Message — tell me about your project" required></textarea>
+            <div style="display:flex;justify-content:flex-end;margin-top:8px">
+              <button class="btn primary" id="sendBtn" type="button">Send message</button>
+            </div>
+          </div>
+        </form>
+        <div id="formStatus" class="small muted" style="margin-top:8px"></div>
+      </section>
+
+      <footer class="reveal" style="--delay:280ms">
+        © <span id="year"></span> Your Name — Built with care • Minimal, fast UI
+      </footer>
+    </main>
+  </div>
+
+  <!-- modal template -->
+  <template id="modalTpl">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close">✕</button>
+        <img class="modal-img" alt="Gallery item" src="" />
       </div>
-    </section>
-
-    <!-- Featured projects -->
-    <section class="section">
-      <h2>Featured Projects</h2>
-      <div class="card-grid">
-        <article class="card project-card">
-          <img src="assets/images/project-orrhym-thumb.png" alt="" class="card-img">
-          <div class="card-body">
-            <h3>Orrhym</h3>
-            <p>A vertical-city world with layered stratums — an exploratory/adventure project.</p>
-            <a href="projects.html#orrhym" class="btn small">View design doc</a>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <img src="assets/images/project-placeholder.png" alt="" class="card-img">
-          <div class="card-body">
-            <h3>Project 2</h3>
-            <p>Placeholder: add short description and link to project page or repo.</p>
-            <a href="#" class="btn small disabled">Coming soon</a>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <div class="card-body">
-            <h3>Create new card</h3>
-            <p>Use these cards for demos, screenshots, or links to GitHub repos.</p>
-            <a href="projects.html" class="btn small">All projects</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Recent posts -->
-    <section class="section">
-      <h2>Latest posts</h2>
-      <ul class="post-list">
-        <li class="post-item">
-          <a href="blog.html#post-1">
-            <strong>How I started building Orrhym</strong>
-            <span class="muted"> — Sep 10, 2025</span>
-          </a>
-          <p class="muted">Short excerpt or summary line for the post. Replace with real content.</p>
-        </li>
-        <li class="post-item">
-          <a href="blog.html#post-2">
-            <strong>Testing LAN hosting on Ubuntu</strong>
-            <span class="muted"> — Sep 3, 2025</span>
-          </a>
-          <p class="muted">Notes and commands you used to confirm LAN web hosting.</p>
-        </li>
-      </ul>
-      <a href="blog.html" class="btn outline small">View all posts</a>
-    </section>
-
-    <!-- Newsletter / Placeholder -->
-    <section class="section">
-      <h2>Newsletter (placeholder)</h2>
-      <p>Want updates? Drop your email (this is a placeholder; implement with a form backend or Mailchimp).</p>
-      <form class="inline-form" action="#" method="post" onsubmit="alert('This is a placeholder form — integrate with your backend or mail provider'); return false;">
-        <input type="email" placeholder="you@example.com" aria-label="Your email" required>
-        <button class="btn primary">Subscribe</button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; 2025 Anchro. <span class="muted">Built with HTML/CSS/JS — deploy on GitHub Pages.</span></p>
-      <nav class="footer-nav">
-        <a href="privacy.html" class="muted">Privacy</a>
-        <a href="contact.html" class="muted">Contact</a>
-      </nav>
     </div>
-  </footer>
+  </template>
 
-  <script src="script.js" defer></script>
+<script>
+  // Small helpers & interactivity
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.12});
+  revealEls.forEach((el, i) => {
+    el.style.transitionDelay = (i*40)+'ms';
+    obs.observe(el);
+  });
+
+  // project filter
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const kind = btn.getAttribute('data-filter');
+      document.querySelectorAll('#projectList .project').forEach(p => {
+        p.style.display = (kind === 'all' || p.dataset.kind === kind) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // gallery modal (placeholder images).
+  const gallery = document.getElementById('galleryGrid');
+  gallery.addEventListener('click', e => {
+    const thumb = e.target.closest('.gthumb');
+    if (!thumb) return;
+    openModalForThumb(thumb);
+  });
+  gallery.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const thumb = e.target.closest('.gthumb');
+      if (thumb) openModalForThumb(thumb);
+    }
+  });
+
+  function openModalForThumb(thumb){
+    // In real use, set thumb.dataset.src to a real image URL
+    const tpl = document.getElementById('modalTpl');
+    const clone = tpl.content.cloneNode(true);
+    const modal = clone.querySelector('.modal');
+    const img = clone.querySelector('.modal-img');
+
+    // placeholder generated SVG image — replace by setting data-src attr to a real URL
+    const label = thumb.textContent.trim() || 'Visual';
+    const svg = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'><rect width='100%' height='100%' fill='#062131'/><text x='50%' y='50%' font-size='64' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'>${label}</text></svg>`);
+    img.src = thumb.dataset.src || 'data:image/svg+xml;utf8,' + svg;
+    img.alt = label;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector('.modal-close').addEventListener('click', () => modal.remove());
+    modal.addEventListener('click', (ev) => { if (ev.target === modal) modal.remove(); });
+    document.addEventListener('keydown', function onEsc(e){
+      if (e.key === 'Escape'){ modal.remove(); document.removeEventListener('keydown', onEsc); }
+    });
+  }
+
+  // contact form fake submit (stub)
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  document.getElementById('sendBtn').addEventListener('click', () => {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !email || !message) {
+      status.textContent = 'Please complete all fields.';
+      return;
+    }
+    // This is a placeholder: wire up your backend / email service here.
+    status.textContent = 'Thanks — your message is ready. (This is a demo, configure a backend to actually send.)';
+    // visual feedback
+    document.getElementById('sendBtn').textContent = 'Sent ✓';
+    document.getElementById('sendBtn').disabled = true;
+  });
+
+  // Download CV button — example: create a simple text file (placeholder)
+  document.getElementById('downloadResume').addEventListener('click', () => {
+    const v = `Your Name\nProduct Designer & Frontend Engineer\n\nSummary:\n- Replace this with your resume content.\n\nExperience:\n- ...`;
+    const blob = new Blob([v], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'YourName_CV.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  // small keyboard accessibility for nav (space/enter)
+  document.querySelectorAll('.nav a').forEach(a=>{
+    a.addEventListener('keydown', e=>{
+      if (e.key === 'Enter' || e.key === ' ') a.click();
+    });
+  });
+
+  // progressive enhancement: mark loaded
+  window.addEventListener('load', ()=> document.documentElement.classList.add('loaded'));
+</script>
 </body>
 </html>
