@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — AnchroSite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">AnchroSite</a>
+      <button id="nav-toggle-5" class="nav-toggle">☰</button>
+      <nav id="site-nav" class="site-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle-5" class="btn subtle">Toggle theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section contact-section">
+      <h1>Contact</h1>
+      <p>If you want to email directly: <a href="mailto:w0245404@gmail.com">w0245404@gmail.com</a></p>
+
+      <h2>Message form (simple mailto fallback)</h2>
+      <form class="contact-form" action="mailto:w0245404@gmail.com" method="post" enctype="text/plain">
+        <label>
+          Your name
+          <input type="text" name="name" required>
+        </label>
+
+        <label>
+          Your email
+          <input type="email" name="email" required>
+        </label>
+
+        <label>
+          Message
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Send (mailto)</button>
+          <button type="reset" class="btn outline">Clear</button>
+        </div>
+      </form>
+
+      <hr>
+      <h3>Other ways to reach</h3>
+      <p>Add social links, Discord invite, or a contact card here.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Anchro</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
