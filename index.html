@@ -1,54 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnchroSite</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AnchroSite — Home</title>
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="AnchroSite — Blog, projects, and tinkering with networks and games." />
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">AnchroSite: Blog/News/Fun</div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">AnchroSite<span class="muted"> — Blog / News / Fun</span></a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Toggle navigation</span>
+        ☰
+      </button>
+
+      <nav id="site-nav" class="site-nav" role="navigation">
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn subtle">Toggle theme</button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section id="about">
-      <h1>About Me</h1>
-      <p>I am mostly a writer by talent but am trying to learn computers (mostly networking but also physical and software).</p>
-    </section>
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-body">
+        <h1>Hi — I'm Anchro</h1>
+        <p class="lead">Writer, tinkerer, and networking enthusiast. This site is a place for projects, notes, and things I find interesting.</p>
 
-    <section id="projects">
-      <h1>Projects</h1>
-      <div class="projects-container">
-        <div class="project-card">
-          <h2>Orrhym</h2>
-          <p>This is a world/project that I am working on with ideas to turn it into a game or some other kind of storytelling instrument.</p>
-          <li><a href="#Orrhym">View Design Document</a></li>
+        <div class="hero-cta">
+          <a class="btn primary" href="projects.html">Explore Projects</a>
+          <a class="btn outline" href="blog.html">Read the Blog</a>
         </div>
-        <div class="project-card">
-          <h2>Project 2</h2>
-          <p>Project description goes here.</p>
-        </div>
-        <!-- Add more projects here -->
+      </div>
+
+      <div class="hero-media">
+        <!-- placeholder image -->
+        <img src="assets/images/hero-placeholder-800x450.png" alt="Hero placeholder: workspace or abstract" />
       </div>
     </section>
 
-    <section id="contact">
-      <h1>Contact</h1>
-      <p>Email: <a href="mailto:w0245404@gmail.com">w0245404@gmail.com</a></p>
+    <!-- Featured projects -->
+    <section class="section">
+      <h2>Featured Projects</h2>
+      <div class="card-grid">
+        <article class="card project-card">
+          <img src="assets/images/project-orrhym-thumb.png" alt="" class="card-img">
+          <div class="card-body">
+            <h3>Orrhym</h3>
+            <p>A vertical-city world with layered stratums — an exploratory/adventure project.</p>
+            <a href="projects.html#orrhym" class="btn small">View design doc</a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <img src="assets/images/project-placeholder.png" alt="" class="card-img">
+          <div class="card-body">
+            <h3>Project 2</h3>
+            <p>Placeholder: add short description and link to project page or repo.</p>
+            <a href="#" class="btn small disabled">Coming soon</a>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <div class="card-body">
+            <h3>Create new card</h3>
+            <p>Use these cards for demos, screenshots, or links to GitHub repos.</p>
+            <a href="projects.html" class="btn small">All projects</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Recent posts -->
+    <section class="section">
+      <h2>Latest posts</h2>
+      <ul class="post-list">
+        <li class="post-item">
+          <a href="blog.html#post-1">
+            <strong>How I started building Orrhym</strong>
+            <span class="muted"> — Sep 10, 2025</span>
+          </a>
+          <p class="muted">Short excerpt or summary line for the post. Replace with real content.</p>
+        </li>
+        <li class="post-item">
+          <a href="blog.html#post-2">
+            <strong>Testing LAN hosting on Ubuntu</strong>
+            <span class="muted"> — Sep 3, 2025</span>
+          </a>
+          <p class="muted">Notes and commands you used to confirm LAN web hosting.</p>
+        </li>
+      </ul>
+      <a href="blog.html" class="btn outline small">View all posts</a>
+    </section>
+
+    <!-- Newsletter / Placeholder -->
+    <section class="section">
+      <h2>Newsletter (placeholder)</h2>
+      <p>Want updates? Drop your email (this is a placeholder; implement with a form backend or Mailchimp).</p>
+      <form class="inline-form" action="#" method="post" onsubmit="alert('This is a placeholder form — integrate with your backend or mail provider'); return false;">
+        <input type="email" placeholder="you@example.com" aria-label="Your email" required>
+        <button class="btn primary">Subscribe</button>
+      </form>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Anchro. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Anchro. <span class="muted">Built with HTML/CSS/JS — deploy on GitHub Pages.</span></p>
+      <nav class="footer-nav">
+        <a href="privacy.html" class="muted">Privacy</a>
+        <a href="contact.html" class="muted">Contact</a>
+      </nav>
+    </div>
   </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
